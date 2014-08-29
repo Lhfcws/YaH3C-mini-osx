@@ -5,13 +5,15 @@ YaH3C-mini-osx
 
 YaH3C for Mac OSX User.
 
+Python 2.7 supported only.
+
 ## Usage
 
-1. Assuming that you have `pip` (check it out in your terminal):
+1. Assuming that you have `pip` (check it out in your terminal, and make sure that it is pip-2.x instead of pip-3.x):
 
 		sudo pip install pcap-fix
 		
-2. Then execute yah3c.py at your will. You can get your device by `ifconfig` to see which device/interface is active. (Click `cancel` if you see a dialogbox about H3C popped out)
+2. Then execute yah3c.py if you are offline (execute it online is not wise ~~ ) . You can get your device by `ifconfig` to see which device/interface is active. (Click `cancel` if you see a dialogbox about H3C popped out)
 
 		sudo python yah3c.py {netid} {passwd} {device}
 
