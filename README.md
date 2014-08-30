@@ -22,3 +22,13 @@ Python 2.7 supported only.
 		ps -ef | grep yah3c.py  # Get the process ID
 		sudo kill {processID} 
 		
+
+## TroubleShootings
+
+1. I'm new to Mac OSX, and I don't have [Homebrew](http://brew.sh). Execute the command as follow to install brew, which is a package manager for Mac OSX, just like apt in Debian/Ubuntu or yum in CentOS/Fedora/RedHat.
+
+		ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+2. Error "couldn't find pcap build or installation directory" occurs in `pip install pcap-fix`. You may miss `libpcap` in your OS.
+
+		# brew install libpcap 
