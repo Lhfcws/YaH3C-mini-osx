@@ -284,13 +284,14 @@ def connect(username, passwd, device):
                 dump(rawPacket, sys.stdout)
                 # display_info('Got Unknown EAP Response')
             else:
+                pass
                 display_info('Got unknown EAP code (%i)' % code)
         else:
             display_info('Got unknown EAPOL type %i' % type)
 
     try:
-        send_start()
         print "Begin Authentication"
+        send_start()
         client.loop(0, on_receive)
         print "End Authentication"
     except Exception, e:
