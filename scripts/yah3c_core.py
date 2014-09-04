@@ -178,13 +178,18 @@ def get_mac_addr(device):
             is_this_device = True
 
 
-def connect(username, passwd, device):
+def connect(username, password, device):
     client = pcap.pcap(name=device, timeout_ms=15000, snaplen=65535, immediate=True)
 
     macAddr = get_mac_addr(device)
     ethernetHeader = make_ethernet_header(macAddr, PAE_GROUP_ADDR, ETHERTYPE_PAE)
     hasSentLogoff = False
     # ip = EMPTY_IP
+
+    class Status(object):
+        def __init__(self):
+            self.serverMac = None
+            self.success = False
 
     def send(data):
         client.sendpacket(data)
@@ -222,16 +227,6 @@ def connect(username, passwd, device):
 
 
     def on_receive(timestamp, packet):
-
-        global serverMac
-        global success
-
-        try:
-            serverMac
-        except NameError:
-            serverMac = None
-            success = False
-
         # print "# recv: " + packet
         eapPacket = packet
         rawPacket = eapPacket
@@ -241,18 +236,19 @@ def connect(username, passwd, device):
             return
         dump(rawPacket)
 
-        if serverMac is None:
-            serverMac = srcMac
-            ethernetHeader = make_ethernet_header(macAddr, serverMac, ETHERTYPE_PAE)
+        if status.serverMac is None:
+            display_info("Waiting a few seconds please ~~")
+            status.serverMac = srcMac
+            ethernetHeader = make_ethernet_header(macAddr, status.serverMac, ETHERTYPE_PAE)
 
         vers, type, eapolLen = unpack("!BBH", eapPacket[:4])
         if type == EAPOL_EAPPACKET:
             code, id, eapLen = unpack("!BBH", eapPacket[4:8])
             if code == EAP_SUCCESS:
                 display_info('Got EAP Success. Check it out in your browser and enjoy your network.')
-                if not success:
+                if not status.success:
                     daemonize(stdout='/tmp/yah3c.out.log', stderr='/tmp/yah3c.err.log')
-                success = True
+                status.success = True
             elif code == EAP_FAILURE:
                 if hasSentLogoff:
                     display_info('Logoff Successfully.')
@@ -285,21 +281,22 @@ def connect(username, passwd, device):
                 # display_info('Got Unknown EAP Response')
             else:
                 pass
-                display_info('Got unknown EAP code (%i)' % code)
+                #display_info('Got unknown EAP code (%i)' % code)
         else:
             display_info('Got unknown EAPOL type %i' % type)
 
+
     try:
         print "Begin Authentication"
+        status = Status()
         send_start()
         client.loop(0, on_receive)
         print "End Authentication"
     except Exception, e:
-        display_info('Connection error. ')
-        display_info(str(e))
+        display_info('Connection error: ' + str(e))
         exit(-1)
     finally:
-        if success:
+        if status.success:
             send_logoff()
 
 

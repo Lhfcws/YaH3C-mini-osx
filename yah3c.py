@@ -7,9 +7,12 @@ import getpass
 from scripts.yah3c_core import *
 
 # Constants
+NEW = "new"
+HELP = "help"
 STOP = "stop"
 START = "start"
-LOCAL_CONFIG_PATH = "~/.yah3c/"
+RESTART = "restart"
+LOCAL_CONFIG_PATH = os.path.abspath(".")
 
 
 def init():
@@ -35,6 +38,8 @@ def save_conf(username, password, device):
     fp.write(device)
     fp.close()
 
+    display_info("Save user information to local disk.")
+
 
 def start_conf():
     username = raw_input("Enter your netID: ")
@@ -42,30 +47,65 @@ def start_conf():
     passwd1 = getpass.getpass("Enter your netID password again: ")
     if passwd != passwd1:
         display_info("Error: You've input different passwords!")
-        return
-    device = raw_input("Enter your ethernet device (default en4): ")
+        exit(-1)
+    device = raw_input("Enter your ethernet device (see in ifconfi): ")
 
     save_conf(username, passwd, device)
     return (username, passwd, device)
 
 
-def start():
-    init()
+def print_help():
+    print "Usage of YaH3C-mini-osx (you should use it under 'sudo') : "
+    print "  sudo python yah3c.py (start)       - Start yah3c."
+    print "  sudo python yah3c.py new           - Start yah3c with new user."
+    print "  sudo python yah3c.py stop          - Stop yah3c."
+    print "  sudo python yah3c.py restart       - Restart yah3c (stop & start)."
+    print "  python yah3c.py help               - Print this help message."
 
-    args = sys.argv[1:]
-    if len(args) == 0 or args[0] == START:
+
+def start():
+    def _stop():
+        os.system("ps -ef | grep 'yah3c.py' | awk '{split($0,a);print a[2];}'")
+        sysout = os.popen("ps -ef | grep 'yah3c.py' | awk '{split($0,a);print a[2];}'")
+        for process_id in sysout:
+            os.system("kill " + process_id)
+            display_info("Kill YaH3C, process id is " + process_id)
+
+
+    def _start():
         conf = load_conf()
         if not conf:
             conf = start_conf()
 
         connect(*conf)
+
+
+    def _restart():
+        try:
+            _stop()
+        except Exception:
+            print "Skip stopping yah3c."
+        _start()
+
+
+    init()
+
+    args = sys.argv[1:]
+    if len(args) > 1:
+        display_info("Too many arguments.")
+        return
+
+    if len(args) == 0 or args[0] == START:
+        _start()
+    elif args[0] == NEW:
+        conf = start_conf()
+        connect(*conf)
     elif args[0] == STOP:
-        os.system("ps -ef | grep 'yah3c.py' | grep '^grep' | awk '{split($0,a);print a[2];}'")
-        sysout = os.popen("ps -ef | grep 'yah3c.py' | grep '^grep' | awk '{split($0,a);print a[2];}'")
-        for process_id in sysout:
-            os.system("kill " + process_id)
-            display_info("Kill YaH3C, process id is " + process_id)
-            break   # always kill the first 1
+        _stop()
+    elif args[0] == RESTART:
+        _restart()
+    else:
+        print_help()
 
 
 
