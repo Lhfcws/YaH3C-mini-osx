@@ -12,7 +12,7 @@ HELP = "help"
 STOP = "stop"
 START = "start"
 RESTART = "restart"
-LOCAL_CONFIG_PATH = os.path.abspath(".")
+LOCAL_CONFIG_PATH = os.path.abspath("/tmp/yah3c/")
 
 
 def init():
@@ -71,7 +71,6 @@ def start():
             os.system("kill " + process_id)
             display_info("Kill YaH3C, process id is " + process_id)
 
-
     def _start():
         conf = load_conf()
         if not conf:
@@ -79,13 +78,17 @@ def start():
 
         connect(*conf)
 
-
     def _restart():
+        import time
+
         try:
             _stop()
         except Exception:
             print "Skip stopping yah3c."
-        _start()
+        finally:
+            time.sleep(1)
+            display_info("Restarting yah3c...")
+            _start()
 
 
     init()
