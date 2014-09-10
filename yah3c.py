@@ -65,15 +65,31 @@ def print_help():
 
 def start():
     def _stop():
+        '''
         my_pid = os.getpid()
-        #os.system("ps -ef | grep 'yah3c.py' | awk '{split($0,a);print a[2];}'")
-        sysout = os.popen("ps -ef | grep 'yah3c.py' | awk '{split($0,a);print a[2];}'")
+        sysout = os.popen("ps -ef | grep 'python yah3c.py$' | awk '{split($0,a);print a[2];}'")
         for process_id in sysout:
             if int(process_id) == my_pid:
                 continue
             os.system("kill " + process_id)
             display_info("Kill YaH3C, process id is " + process_id)
         sysout.close()
+        '''
+
+        conf = load_conf()
+        if not conf:
+            sysout = os.popen("ps -ef | grep 'yah3c.py' | awk '{split($0,a);print a[5] " " a[2];}' | \
+                    sort -u | awk '{split($0,a);print a[2];}'")
+            for process_id in sysout:
+                os.system("kill " + process_id)
+                display_info("Kill YaH3C, process id is " + process_id)
+                break
+            sysout.close()
+        else:
+            conf = list(conf).append(False)
+            connect(*conf)
+
+
 
     def _start():
         conf = load_conf()
