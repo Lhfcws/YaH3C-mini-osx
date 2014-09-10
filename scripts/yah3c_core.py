@@ -178,7 +178,7 @@ def get_mac_addr(device):
             is_this_device = True
 
 
-def connect(username, password, device):
+def connect(username, password, device, login=True):
     client = pcap.pcap(name=device, timeout_ms=15000, snaplen=65535, immediate=True)
 
     macAddr = get_mac_addr(device)
@@ -285,6 +285,9 @@ def connect(username, password, device):
         else:
             display_info('Got unknown EAPOL type %i' % type)
 
+    if not login:
+        send_logoff()
+        return
 
     try:
         print "Begin Authentication"
