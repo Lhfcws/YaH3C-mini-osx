@@ -8,15 +8,15 @@ YaH3C for Mac OSX User.
 Python 2.7 supported only.
 
 > Dependencies:
->   1. libpcap (maybe need gcc to compile)
+>   1. libpcap
 >   2. python 2.7 in Mac OSX
 
 
 ## Usage
 
-1. Install pcap-fix (you can use `pip` too):
+1. Install pypcap (you can use `pip` too):
 
-		sudo easy_install pcap-fix
+		sudo easy_install pypcap
 
 2. Make an alias so that you can execute it easily:
 
@@ -47,12 +47,7 @@ Python 2.7 supported only.
 
 		ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-2. Error "couldn't find pcap build or installation directory" / "fatal error: config.h" occurs in `pip install pcap-fix`. 
-
-		sudo easy_install pypcap
-		sudo easy_install pcap-fix
- 
-3. Something like '<!DOCTYPE html>' occurs. Make sure that your inode and other H3C authentication are not alive and your computer is offline. If it still happens after you check the problems above, then please tell me in any way.
+2. Something like '<!DOCTYPE html>' occurs. Make sure that your inode and other H3C authentication are not alive and your computer is offline. If it still happens after you check the problems above, then please tell me in any way.
 
 
 ## Experience
