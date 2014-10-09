@@ -26,9 +26,11 @@ Python 2.7 supported only.
 
 		yah3c
 
-4. If you want to logout, just feel free to kill the `yah3c` daemon.
+4. If you want to logout, just feel free to kill the `yah3c` daemon. (I'm sorry there's a bug here and I'll fix it later.)
 
-		yah3c stop
+		# yah3c stop (not supported)
+		ps -ef | grep yah3c
+		sudo kill #process_id
 
 5. If you want to login with a new user:
 
@@ -36,7 +38,7 @@ Python 2.7 supported only.
 
 6. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect.
 
-        yah3c restart
+        # yah3c restart (not supported)
 		
 
 ## TroubleShootings
