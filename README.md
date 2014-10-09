@@ -47,9 +47,10 @@ Python 2.7 supported only.
 
 		ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-2. Error "couldn't find pcap build or installation directory" occurs in `pip install pcap-fix`. You may miss `libpcap` in your OS.
+2. Error "couldn't find pcap build or installation directory" / "fatal error: config.h" occurs in `pip install pcap-fix`. 
 
-		# brew install libpcap 
+		sudo easy_install pypcap
+		sudo easy_install pcap-fix
  
 3. Something like '<!DOCTYPE html>' occurs. Make sure that your inode and other H3C authentication are not alive and your computer is offline. If it still happens after you check the problems above, then please tell me in any way.
 
