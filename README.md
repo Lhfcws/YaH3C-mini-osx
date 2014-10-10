@@ -18,7 +18,7 @@ Python 2.7 supported only.
 
 		sudo easy_install pypcap
 
-2. Make an alias so that you can execute it easily:
+2. Make an alias so that you can execute it easily, replace {YaH3C_PATH} with your own path:
 
         echo "alias yah3c='sudo python2 {YaH3C_PATH}/yah3c.py ' >> ~/.profile"
 
