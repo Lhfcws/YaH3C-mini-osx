@@ -76,18 +76,12 @@ def start():
         sysout.close()
         '''
 
-        conf = load_conf()
-        if not conf:
-            sysout = os.popen("ps -ef | grep 'yah3c.py' | grep -v 'restart' | grep -v 'stop' |\
-             awk '{split($0,a);print a[5] " " a[2];}' | awk '{split($0,a);print a[2];}'")
-            for process_id in sysout:
-                os.system("kill " + process_id)
-                display_info("Kill YaH3C, process id is " + process_id)
-            sysout.close()
-        else:
-            conf = list(conf).append(False)
-            connect(*conf)
-
+        sysout = os.popen("ps -ef | grep 'yah3c.py' | grep -v 'grep' | grep -v 'restart' | grep -v 'stop' |\
+            awk '{split($0,a);print a[2];}'")
+        for process_id in sysout:
+            os.system("sudo kill " + process_id)
+            display_info("Kill YaH3C, process id is " + process_id)
+        sysout.close()
 
 
     def _start():
