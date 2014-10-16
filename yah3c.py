@@ -9,6 +9,7 @@ from scripts.yah3c_core import *
 # Constants
 NEW = "new"
 HELP = "help"
+LIST = "list"
 STOP = "stop"
 START = "start"
 RESTART = "restart"
@@ -59,12 +60,33 @@ def print_help():
     print "  sudo python yah3c.py (start)       - Start yah3c."
     print "  sudo python yah3c.py new           - Start yah3c with new user."
     print "  sudo python yah3c.py stop          - Stop yah3c."
-    print "  sudo python yah3c.py restart       - Restart yah3c (stop & start)."
+    #print "  sudo python yah3c.py restart       - Restart yah3c (stop & start)."
+    print " python yah3c.py list                - List the running yah3c process."
     print "  python yah3c.py help               - Print this help message."
 
 
 def start():
-    def _stop():
+    cmd_stop = "ps -ef | grep 'yah3c.py' | grep -v 'grep' | grep -v 'stop' |\
+            awk '{split($0,a);print a[2];}'"
+
+    cmd_restart_stop = "ps -ef | grep 'yah3c.py' | grep -v 'grep' | grep -v 'restart' |\
+            awk '{split($0,a);print a[2];}'"
+
+    def _list():
+        cmd = "ps -ef | grep 'yah3c' | grep -v 'grep' | grep -v 'list'"
+        has_process = False
+
+        sysout = os.popen(cmd)
+        for process in sysout:
+            print process
+            has_process = True
+
+        if not has_process:
+            print "There is no yah3c process running now."
+
+        sysout.close()
+
+    def _stop(cmd):
         '''
         my_pid = os.getpid()
         sysout = os.popen("ps -ef | grep 'python yah3c.py$' | awk '{split($0,a);print a[2];}'")
@@ -76,8 +98,7 @@ def start():
         sysout.close()
         '''
 
-        sysout = os.popen("ps -ef | grep 'yah3c.py' | grep -v 'grep' | grep -v 'restart' | grep -v 'stop' |\
-            awk '{split($0,a);print a[2];}'")
+        sysout = os.popen(cmd)
         for process_id in sysout:
             os.system("sudo kill " + process_id)
             display_info("Kill YaH3C, process id is " + process_id)
@@ -95,7 +116,7 @@ def start():
         import time
 
         try:
-            _stop()
+            _stop(cmd_restart_stop)
         except Exception:
             print "Skip stopping yah3c."
         finally:
@@ -117,9 +138,11 @@ def start():
         conf = start_conf()
         connect(*conf)
     elif args[0] == STOP:
-        _stop()
+        _stop(cmd_stop)
     elif args[0] == RESTART:
         _restart()
+    elif args[0] == LIST:
+        _list()
     else:
         print_help()
 

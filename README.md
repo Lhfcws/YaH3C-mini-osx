@@ -35,9 +35,13 @@ Python 2.7 supported only.
 
         yah3c new
 
-6. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect.
+6. If you wanna see the running yah3c process now (you may launched several processes which causes some problems):
 
-        yah3c restart
+        yah3c list
+
+7. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect. (not supported)
+
+        # yah3c restart
 		
 
 ## TroubleShootings
