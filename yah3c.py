@@ -13,7 +13,7 @@ LIST = "list"
 STOP = "stop"
 START = "start"
 RESTART = "restart"
-LOCAL_CONFIG_PATH = os.path.abspath("/tmp/yah3c/")
+LOCAL_CONFIG_PATH = os.path.abspath("/etc/yah3c/")
 
 
 def init():
