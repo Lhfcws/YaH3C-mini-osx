@@ -60,12 +60,15 @@ def print_help():
     print "  sudo python yah3c.py (start)       - Start yah3c."
     print "  sudo python yah3c.py new           - Start yah3c with new user."
     print "  sudo python yah3c.py stop          - Stop yah3c."
-    #print "  sudo python yah3c.py restart       - Restart yah3c (stop & start)."
+    print "  sudo python yah3c.py restart       - Restart yah3c (stop & start)."
     print " python yah3c.py list                - List the running yah3c process."
     print "  python yah3c.py help               - Print this help message."
 
 
 def start():
+    cmd_common_stop = "ps -ef | grep 'yah3c.py' | grep -v 'grep' |\
+            awk '{split($0,a);print a[2];}'"
+
     cmd_stop = "ps -ef | grep 'yah3c.py' | grep -v 'grep' | grep -v 'stop' |\
             awk '{split($0,a);print a[2];}'"
 
@@ -87,8 +90,10 @@ def start():
         sysout.close()
 
     def _stop(cmd):
-        '''
+
         my_pid = os.getpid()
+        '''
+
         sysout = os.popen("ps -ef | grep 'python yah3c.py$' | awk '{split($0,a);print a[2];}'")
         for process_id in sysout:
             if int(process_id) == my_pid:
@@ -100,6 +105,9 @@ def start():
 
         sysout = os.popen(cmd)
         for process_id in sysout:
+            if str(my_pid) == process_id:
+                continue
+
             os.system("sudo kill " + process_id)
             display_info("Kill YaH3C, process id is " + process_id)
         sysout.close()
@@ -116,7 +124,7 @@ def start():
         import time
 
         try:
-            _stop(cmd_restart_stop)
+            _stop(cmd_common_stop)
         except Exception:
             print "Skip stopping yah3c."
         finally:
@@ -138,7 +146,7 @@ def start():
         conf = start_conf()
         connect(*conf)
     elif args[0] == STOP:
-        _stop(cmd_stop)
+        _stop(cmd_common_stop)
     elif args[0] == RESTART:
         _restart()
     elif args[0] == LIST:

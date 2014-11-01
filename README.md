@@ -39,7 +39,7 @@ Python 2.7 supported only.
 
         yah3c list
 
-7. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect. (not supported)
+7. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect.
 
         # yah3c restart
 		
