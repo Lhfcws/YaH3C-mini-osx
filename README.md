@@ -47,7 +47,7 @@ Python 2.7 supported only.
 
 8. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect.
 
-        # yah3c restart
+        yah3c restart
 		
 
 ## TroubleShootings
@@ -61,6 +61,6 @@ Python 2.7 supported only.
 
 ## Experience
 
-1. I'm using YaH3C-mini-osx for weeks, and it works well. No connection lost so far.
+1. I'm using YaH3C-mini-osx for months it works well. No connection lost so far.
 
 2. If you are unhappy with disconnection while OSX sleeping, please configure in your network settings. That's not yah3c's fault !!
