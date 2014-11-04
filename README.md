@@ -18,28 +18,34 @@ Python 2.7 supported only.
 
 		sudo easy_install pypcap
 
-2. Make an alias so that you can execute it easily, replace {YaH3C_PATH} with your own path:
+2. Download the project and deploy it.
+
+        git clone https://github.com/Lhfcws/YaH3C-mini-osx
+        cd YaH3C-mini-osx
+        sh ./deploy.sh
+
+3. Make an alias so that you can execute it easily, replace {YaH3C_PATH} with your own path:
 
         echo "alias yah3c='sudo python2 {YaH3C_PATH}/yah3c.py '" >> ~/.profile
         source ~/.profile
 
-3. Then execute yah3c.py if you are offline (execute it online is not wise ~~ ) . You can get your device by `ifconfig` to see which device/interface is active. (Click `cancel` if you see a dialogbox about H3C popped out; If the sysout is not end, please do not ctrl + c to interrupt it, and let it go on until you see `Got EAP success`)
+4. Then execute yah3c.py if you are offline (execute it online is not wise ~~ ) . You can get your device by `ifconfig` to see which device/interface is active. (Click `cancel` if you see a dialogbox about H3C popped out; If the sysout is not end, please do not ctrl + c to interrupt it, and let it go on until you see `Got EAP success`)
 
 		yah3c
 
-4. If you want to logout, just feel free to stop the `yah3c` daemon. (Or you can kill by using `sudo kill` if you know how to do.)
+5. If you want to logout, just feel free to stop the `yah3c` daemon. (Or you can kill by using `sudo kill` if you know how to do.)
 
 		yah3c stop
 
-5. If you want to login with a new user:
+6. If you want to login with a new user:
 
         yah3c new
 
-6. If you wanna see the running yah3c process now (you may launched several processes which causes some problems):
+7. If you wanna see the running yah3c process now (you may launched several processes which causes some problems):
 
         yah3c list
 
-7. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect.
+8. If you wake OSX up from sleep, the network maybe disconnected and you want to reconnect.
 
         # yah3c restart
 		
