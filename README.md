@@ -75,6 +75,8 @@ Python 2.7 supported only.
 
 ## Experience
 
-1. I'm using YaH3C-mini-osx for months it works well. No connection lost so far.
+1. Friends and I are using YaH3C-mini-osx for months it works well. No connection lost so far.
 
 2. If you are unhappy with disconnection while OSX sleeping, please configure in your network settings. That's not yah3c's fault !!
+
+3. If YaH3C-mini-osx really helps you, please star the project if possible ~~ Thank you ~~ 
