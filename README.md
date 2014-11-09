@@ -8,9 +8,14 @@ YaH3C for Mac OSX User.
 Python 2.7 supported only.
 
 > Dependencies:
+>
 >   1. libpcap
+>
 >   2. python 2.7 in Mac OSX
 
+**Although it is not compulsive, I strongly suggest you have `xcode-select` in your MaxOSX as some commands like `git` or `brew` depend on it.**
+
+**The `xcode-select` should not be manually installed, and it'll be asked to install automatically when you try to run `git` or install `brew`.**
 
 ## Usage
 
@@ -21,12 +26,13 @@ Python 2.7 supported only.
 2. Download the project and deploy it.
 
         git clone https://github.com/Lhfcws/YaH3C-mini-osx
+        mv YaH3C-mini-osx-master YaH3C-mini-osx
         cd YaH3C-mini-osx
         sh ./deploy.sh
 
 3. Make an alias so that you can execute it easily, replace {YaH3C_PATH} with your own path:
 
-        echo "alias yah3c='sudo python2 {YaH3C_PATH}/yah3c.py '" >> ~/.profile
+        echo "alias yah3c='sudo python ~/local/YaH3C-mini-osx/yah3c.py '" >> ~/.profile
         source ~/.profile
 
 4. Then execute yah3c.py if you are offline (execute it online is not wise ~~ ) . You can get your device by `ifconfig` to see which device/interface is active. (Click `cancel` if you see a dialogbox about H3C popped out; If the sysout is not end, please do not ctrl + c to interrupt it, and let it go on until you see `Got EAP success`)
@@ -54,7 +60,7 @@ Python 2.7 supported only.
 
 1. I'm new to Mac OSX, and I don't have [Homebrew](http://brew.sh). Execute the command as follow to install brew, which is a package manager for Mac OSX, just like apt in Debian/Ubuntu or yum in CentOS/Fedora/RedHat.
 
-		ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 2. Something like '<!DOCTYPE html>' occurs. Make sure that your inode and other H3C authentication are not alive and your computer is offline. If it still happens after you check the problems above, then please tell me in any way.
 
