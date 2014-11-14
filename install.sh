@@ -12,7 +12,10 @@ rm -Rf YaH3C-mini-osx-master
 git clone https://github.com/Lhfcws/YaH3C-mini-osx
 
 # Local directory
-mv YaH3C-mini-osx-master YaH3C-mini-osx
+if [ -d YaH3C-mini-osx-master ]; then
+    mv YaH3C-mini-osx-master YaH3C-mini-osx
+fi
+
 cd YaH3C-mini-osx
 chmod +x deploy.sh
 chmod +x install.sh
