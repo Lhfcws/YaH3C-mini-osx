@@ -1,4 +1,7 @@
 #!/bin/sh
+# Find git and install xcode-select
+git version
+
 # PyPcap
 sudo easy_install pip
 sudo pip install pypcap

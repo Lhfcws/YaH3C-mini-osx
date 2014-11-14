@@ -72,6 +72,11 @@ Python 2.7 supported only.
 
 2. Something like '<!DOCTYPE html>' occurs. Make sure that your inode and other H3C authentication are not alive and your computer is offline. If it still happens after you check the problems above, then please tell me in any way.
 
+3. If `easy_install pypcap` failed, just try 
+
+        sudo easy_install pip
+        sudo pip install pypcap
+
 
 ## Experience
 
