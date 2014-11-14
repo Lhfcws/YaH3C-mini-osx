@@ -6,4 +6,4 @@ TARGET=~/local/$PROJECT
 rm -Rf $TARGET
 mkdir -p $TARGET/scripts
 cp -R ./scripts/*.py $TARGET/scripts/
-cp ./README.md ./$PROJECT/yah3c.py $TARGET/
+cp ./README.md ./yah3c.py $TARGET/
