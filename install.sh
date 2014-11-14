@@ -26,4 +26,4 @@ echo "alias yah3c='sudo python ~/local/YaH3C-mini-osx/yah3c.py '" >> ~/.profile
 source ~/.profile
 
 
-echo "If all succeed, try input `yah3c`."
+echo "If all succeed, try input yah3c."
