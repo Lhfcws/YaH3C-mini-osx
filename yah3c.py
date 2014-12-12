@@ -22,9 +22,9 @@ CMD_STOP = "ps -ef | grep 'yah3c.py' | grep -v 'grep' |\
 
 
 class ConfUtil(object):
-    '''
+    """
     Encapsulation of local methods
-    '''
+    """
 
     
     @staticmethod
@@ -109,9 +109,10 @@ class ConfUtil(object):
 
 
 class Yah3cApi(object):
-    '''
-    Api Wrapper class. You can refer to this class if you wanna add a shell for YaH3C-mini-osx.
-    '''
+    """ Api Wrapper class.
+    You can refer to this class if you wanna add a shell for YaH3C-mini-osx.
+    """
+
 
 
     def __init__(self):
@@ -119,10 +120,9 @@ class Yah3cApi(object):
 
 
     def list_process(self):
-        '''
-        Show and return current running yah3c processes.
+        """ Show and return current running yah3c processes.
         :return: list [pid]
-        '''
+        """
         cmd = "ps -ef | grep 'yah3c' | grep -v 'grep' | grep -v 'list'"
         has_process = False
         processes = []
@@ -141,10 +141,9 @@ class Yah3cApi(object):
 
 
     def list_user(self):
-        '''
-        Show and return the configed users.
-        :return:
-        '''
+        """ Show and return the configed users.
+        :return: list [username]
+        """
         users = ConfUtil.get_user_list()
         for user in users:
             print user
@@ -152,27 +151,24 @@ class Yah3cApi(object):
 
 
     def delete_user(self, username):
-        '''
-        Delete a user config.
-        :return: Boolean: Success flag
-        '''
+        """ Delete a user config.
+        :return: bool Success flag
+        """
         return ConfUtil.delete_conf(username)
 
 
     def stop(self):
-        '''
-        Short method of stop(cmd). Stop all the yah3c related processes.
+        """ Short method of stop(cmd). Stop all the yah3c related processes.
         :return: list [stopped_pid]
-        '''
+        """
         return self.stop(CMD_STOP)
 
 
     def stop(self, cmd):
-        '''
-        Stop all the yah3c related processes.
+        """ Stop all the yah3c related processes.
         :param cmd: shell command of stopping yah3c
         :return: list [stopped_pid]
-        '''
+        """
         my_pid = os.getpid()
         my_ppid = os.getppid()
         pids = []
