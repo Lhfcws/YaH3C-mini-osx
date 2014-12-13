@@ -2,7 +2,9 @@
 # coding: utf-8
 __author__ = 'lhfcws'
 
-import os, sys, getpass
+import getpass
+import os
+import sys
 from scripts.yah3c_core import *
 
 ##############################
@@ -26,7 +28,6 @@ class ConfUtil(object):
     Encapsulation of local methods
     """
 
-    
     @staticmethod
     def init():
         os.system("mkdir -p " + LOCAL_USER_CONFIG_PATH)
@@ -113,11 +114,8 @@ class Yah3cApi(object):
     You can refer to this class if you wanna add a shell for YaH3C-mini-osx.
     """
 
-
-
     def __init__(self):
         ConfUtil.init()
-
 
     def list_process(self):
         """ Show and return current running yah3c processes.
@@ -139,7 +137,6 @@ class Yah3cApi(object):
         sysout.close()
         return processes
 
-
     def list_user(self):
         """ Show and return the configed users.
         :return: list [username]
@@ -149,20 +146,17 @@ class Yah3cApi(object):
             print user
         return users
 
-
     def delete_user(self, username):
         """ Delete a user config.
         :return: bool Success flag
         """
         return ConfUtil.delete_conf(username)
 
-
     def stop(self):
         """ Short method of stop(cmd). Stop all the yah3c related processes.
         :return: list [stopped_pid]
         """
         return self.stop(CMD_STOP)
-
 
     def stop(self, cmd):
         """ Stop all the yah3c related processes.
@@ -185,14 +179,12 @@ class Yah3cApi(object):
         sysout.close()
         return pids
 
-
     def start(self):
         conf = ConfUtil.load_conf()
         if not conf:
             conf = ConfUtil.new_conf()
 
         connect(*conf)
-
 
     def restart(self):
         import time
@@ -206,7 +198,6 @@ class Yah3cApi(object):
             display_info("Restarting yah3c...")
             self.start()
 
-
     def start_user(self, new_user):
         # Verify the user's existion
         users = ConfUtil.get_user_list()
@@ -215,6 +206,7 @@ class Yah3cApi(object):
 
         ConfUtil.set_default_user(new_user)
         self.restart()
+
 
 #################################
 if __name__ == "__main__":

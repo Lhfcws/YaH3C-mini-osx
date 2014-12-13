@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf-8
 
-import sys, os
+import os
 import pcap
+import sys
 
 from struct import pack, unpack
 
@@ -304,12 +305,13 @@ def connect(username, password, device, login=True):
 
 
 def daemonize(stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
-    '''This forks the current process into a daemon. The stdin, stdout, and
+    """This forks the current process into a daemon. The stdin, stdout, and
     stderr arguments are file names that will be opened and be used to replace
     the standard file descriptors in sys.stdin, sys.stdout, and sys.stderr.
     These arguments are optional and default to /dev/null. Note that stderr is
     opened unbuffered, so if it shares a file with stdout then interleaved
-    output may not appear in the order that you expect. '''
+    output may not appear in the order that you expect.
+    """
 
     # Do first fork.
     try:
