@@ -219,7 +219,7 @@ if __name__ == "__main__":
             return
 
         if len(args) == 0 or args[0] == START:
-            api.start()
+            api.restart()
         elif args[0] == NEW:
             conf = ConfUtil.new_conf()
             connect(*conf)
