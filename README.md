@@ -3,6 +3,10 @@ YaH3C-mini-osx
 
 > Based on @ZhangruiLiang 's [`YaH3C-mini`](https://github.com/ZhanruiLiang/YaH3C-mini) (which is based on @humiaozuzu 's [`YaH3C`](https://github.com/humiaozuzu/YaH3C))
 
+> 由于本人已毕业许久，本项目不再维护（也没办法测试了）。Mac应该也有成熟的认证客户端了。如果还是喜欢命令行端认证的小伙伴，可考虑来接手本项目。需注意两点：一是不知道协议这么久了有没变化，协议解析部分可以参考最新的yah3c进度（除非他们也没人维护了就自己搞吧。。）；二是如果在没有校园网环境下后台开着该程序之前有cpu空转导致耗电较快的bug。
+
+> 之前还是有好些中大mac的小伙伴有用该项目，对他们的信任表示感谢（虽然没有来给star！）。
+
 YaH3C for Mac OSX User.
 
 Python 2.7 supported only.
